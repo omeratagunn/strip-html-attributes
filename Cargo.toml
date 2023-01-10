@@ -1,0 +1,28 @@
+[package]
+name = "strip-html-attributes"
+version = "0.1.0"
+edition = "2021"
+include = ["/src"]
+authors = ["omer atagun", "omer atagun<omratagn@gmail.com>"]
+license= "MIT"
+keywords = ["strip html attributes", "javascript", "typescript", "html", "remove html attributes from html"]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+colored = "2"
+terminal-spinners = "0.3.2"
+serde = { version = "1.0", features = ["derive"] }
+clap = { version = "4.0.32", features = ["derive"] }
+
+[[bin]]
+name = "strip-html-attributes"
+path = "src/main.rs"
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3
+strip = true
+lto = true
+codegen-units = 1
