@@ -9,15 +9,15 @@ export const MyButton = ()=> {
     return <>
 
     <button ></button>
-        <p ></p>
-        <p ></p>
-        <span ></span>
-        <span ></span>
+        <p data-testid='firstid'></p>
+        <p data-testid='secondid'></p>
+        <span data-testid={'thirdird'}></span>
+        <span data-testid={"forthid"}></span>
         <p vccxvxcvxcv='yodel heeeej'></p>
         <p kebab={'kebab yo'}></p>
         <p kebab={'kebab yo'}></p>
         <p kebab={'kebab yo'}></p>
-        <p ></p>
+        <p data-testid="5thid"></p>
 
     </>
 }
