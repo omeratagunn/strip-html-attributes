@@ -1,7 +1,9 @@
 use std::fs;
 use std::path::Path;
-use strip_html_attributes::{Delimiters, DelimiterSchema, find_attributes_and_replace, write_into_file};
 use std::path::PathBuf;
+use strip_html_attributes::{
+    find_attributes_and_replace, write_into_file, DelimiterSchema, Delimiters,
+};
 #[test]
 fn test_with_given_delimiters_in_populated_file() {
     let srcdir = PathBuf::from("./example/components/suchbutton.js");
@@ -37,7 +39,7 @@ fn test_with_given_delimiters_in_populated_file() {
     let mut result = find_attributes_and_replace(is_operator, &mut attribute, contents, delimiters);
     write_into_file(&mut result, attribute, file_path);
 
-    if result.find(&attr) > Some(0){
+    if result.find(&attr) > Some(0) {
         assert!(false);
     }
 
@@ -78,13 +80,13 @@ fn test_with_given_delimiters_in_not_populated_file() {
     let mut result = find_attributes_and_replace(is_operator, &mut attribute, contents, delimiters);
     write_into_file(&mut result, attribute, file_path);
 
-    if result.find(&attr) > Some(0){
+    if result.find(&attr) > Some(0) {
         assert!(false);
     }
 
     fs::write(Path::new(file_path), prevContents).expect("TODO: panic message");
 }
-
+#[test]
 fn test_with_html_file() {
     let srcdir = PathBuf::from("./example/components/suchanhtmlfile.html");
     let string_path = fs::canonicalize(&srcdir);
@@ -119,7 +121,7 @@ fn test_with_html_file() {
     let mut result = find_attributes_and_replace(is_operator, &mut attribute, contents, delimiters);
     write_into_file(&mut result, attribute, file_path);
 
-    if result.find(&attr) > Some(0){
+    if result.find(&attr) > Some(0) {
         assert!(false);
     }
 

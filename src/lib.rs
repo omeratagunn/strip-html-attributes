@@ -10,7 +10,6 @@ pub struct DelimiterSchema {
     pub ends_with: char,
 }
 
-
 pub fn find_attributes_and_replace(
     is_operator: char,
     attribute: &mut String,
@@ -90,6 +89,10 @@ pub fn find_attributes_and_replace(
     return file_content;
 }
 
-pub fn write_into_file(file_content: &mut String, given_attribute: String, file_path: &str ){
-    fs::write(Path::new(file_path), file_content.replace(&given_attribute, "")).expect("TODO: panic message");
+pub fn write_into_file(file_content: &mut String, given_attribute: String, file_path: &str) {
+    fs::write(
+        Path::new(file_path),
+        file_content.replace(&given_attribute, ""),
+    )
+    .expect("TODO: panic message");
 }
