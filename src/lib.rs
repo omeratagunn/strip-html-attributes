@@ -14,7 +14,7 @@ pub fn find_attributes_and_replace(
     is_operator: char,
     attribute: &mut String,
     mut file_content: String,
-    delimiters: Delimiters,
+    delimiters: &Delimiters,
 ) -> String {
     let mut iter_count = 0;
     // we want to mutate the attribute during iteration, so we cloned it.
@@ -76,7 +76,7 @@ pub fn find_attributes_and_replace(
                     given_attribute.push(*c);
                 }
                 char_index = *c;
-                iter_count = iter_count + 1;
+                iter_count += 1;
             }
         }
         for (_, replacement) in collection.iter().enumerate() {

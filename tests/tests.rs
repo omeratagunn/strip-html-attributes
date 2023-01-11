@@ -36,7 +36,8 @@ fn test_with_given_delimiters_in_populated_file() {
         ],
     };
 
-    let mut result = find_attributes_and_replace(is_operator, &mut attribute, contents, delimiters);
+    let mut result =
+        find_attributes_and_replace(is_operator, &mut attribute, contents, &delimiters);
     write_into_file(&mut result, attribute, file_path);
 
     if result.find(&attr) > Some(0) {
@@ -77,7 +78,8 @@ fn test_with_given_delimiters_in_not_populated_file() {
         ],
     };
 
-    let mut result = find_attributes_and_replace(is_operator, &mut attribute, contents, delimiters);
+    let mut result =
+        find_attributes_and_replace(is_operator, &mut attribute, contents, &delimiters);
     write_into_file(&mut result, attribute, file_path);
 
     if result.find(&attr) > Some(0) {
@@ -118,7 +120,8 @@ fn test_with_html_file() {
         ],
     };
 
-    let mut result = find_attributes_and_replace(is_operator, &mut attribute, contents, delimiters);
+    let mut result =
+        find_attributes_and_replace(is_operator, &mut attribute, contents, &delimiters);
     write_into_file(&mut result, attribute, file_path);
 
     if result.find(&attr) > Some(0) {

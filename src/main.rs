@@ -41,6 +41,7 @@ fn main() {
         ],
     };
 
-    let mut result = find_attributes_and_replace(is_operator, &mut attribute, contents, delimiters);
+    let mut result =
+        find_attributes_and_replace(is_operator, &mut attribute, contents, &delimiters);
     write_into_file(&mut result, attribute, file_path);
 }
