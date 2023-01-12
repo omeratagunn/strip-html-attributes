@@ -17,8 +17,16 @@ Quite easy.
 
 ./strip-html-attributes --attribute=data-something --folder=/var/www/bin
 
+if you have cloned the repo then;
+
+cargo run -- --attribute=data-something --folder=/var/www/bin
 # Thats it.
 ```
+
+## Contribution
+- You want to make more bulletproof? I would love to learn,
+- You want to make it faster, I would love to learn.
+- Better idea to solve the problem? I would love to learn.
 
 # Licence
 The MIT License (MIT)
