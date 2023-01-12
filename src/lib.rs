@@ -16,19 +16,19 @@ pub fn find_attributes_and_replace(
     mut file_content: String,
     delimiters: &Delimiters,
 ) -> String {
-    let mut iter_count = 0;
     // we want to mutate the attribute during iteration, so we cloned it.
     let mut given_attribute = attribute.clone();
     // look for given attribute in contents where file represented as string
     let first_position = file_content.find(&given_attribute);
     // check if any byte exist, if yes, then we can continue with this file.
     if first_position > Some(0) {
+        let mut iter_count = 0;
         // vector collection's purpose is to not to break from the loop, stack them and iterate once more to replace content //
         let mut collection = vec![];
         // collect characters of contents into vec<char> so we can also index reference from char later on and start collecting from the first occurence.
         let char: Vec<char> = file_content
             .chars()
-            .skip(*&first_position.unwrap())
+            .skip(first_position.unwrap())
             .collect();
         // the purpose of this is to keep track and replace during loop. this bad boy will always come -1 than current index
         let mut char_index = '0';
@@ -41,7 +41,7 @@ pub fn find_attributes_and_replace(
         let mut delim_ends = 0;
         for (i, c) in char.iter().enumerate() {
             // push current index of character into this bad boy, so once we figure lets say it ends its data-testid, then we can start collecting next ones //
-            tmp_attribute_stack.push(**&c);
+            tmp_attribute_stack.push(*c);
             // if we find exact attribe at the end of temporarily created stack, we get bytes, then we can start to collect what was that variable ..
             if tmp_attribute_stack.ends_with(&given_attribute) {
                 collect = 1;
@@ -65,7 +65,7 @@ pub fn find_attributes_and_replace(
                     // then clear the collection
                     given_attribute.clear();
                     // create again base attribute we look for
-                    given_attribute.push_str(&attribute);
+                    given_attribute.push_str(attribute);
                     // stop collecting characters //
                     should_collect_chars = 0;
                     // stop till next endswith//
@@ -87,10 +87,10 @@ pub fn find_attributes_and_replace(
             }
         }
     }
-    return file_content;
+    file_content
 }
 
-pub fn write_into_file(file_content: &mut String, given_attribute: String, file_path: &str) {
+pub fn write_into_file(file_content: &mut str, given_attribute: String, file_path: &str) {
     fs::write(
         Path::new(file_path),
         file_content.replace(&given_attribute, ""),
@@ -114,7 +114,7 @@ pub fn find_and_replace_recursively(
                 &current_path.display().to_string(),
                 is_operator,
                 attribute.clone(),
-                &delimiters,
+                delimiters,
             );
             continue;
         }
@@ -126,7 +126,7 @@ pub fn find_and_replace_recursively(
         let contents = fs::read_to_string(file_path).expect("should have been read the file");
 
         let mut result =
-            find_attributes_and_replace(is_operator, &mut attribute, contents, &delimiters);
+            find_attributes_and_replace(is_operator, &mut attribute, contents, delimiters);
         write_into_file(&mut result, attribute.clone(), &file_path.clone());
     }
 }

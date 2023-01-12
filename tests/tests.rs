@@ -11,10 +11,10 @@ fn test_with_given_delimiters_in_populated_file() {
     let binding = string_path.unwrap();
     let file_path = binding.to_str().unwrap();
 
-    let mut contents = fs::read_to_string(file_path).expect("should have been read the file");
+    let  contents = fs::read_to_string(file_path).expect("should have been read the file");
     let is_operator = '=';
 
-    let mut prev_contents = contents.clone();
+    let  prev_contents = contents.clone();
     let mut attribute = String::from("data-testid");
     attribute.push_str(&is_operator.to_string());
 
@@ -53,10 +53,10 @@ fn test_with_html_file() {
     let binding = string_path.unwrap();
     let file_path = binding.to_str().unwrap();
 
-    let mut contents = fs::read_to_string(file_path).expect("should have been read the file");
+    let contents = fs::read_to_string(file_path).expect("should have been read the file");
     let is_operator = '=';
 
-    let mut prev_contents = contents.clone();
+    let  prev_contents = contents.clone();
     let mut attribute = String::from("data-testid");
     attribute.push_str(&is_operator.to_string());
 
