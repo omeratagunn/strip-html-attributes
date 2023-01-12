@@ -96,3 +96,36 @@ pub fn write_into_file(file_content: &mut String, given_attribute: String, file_
     )
     .expect("TODO: panic message");
 }
+
+pub fn find_and_replace_recursively(
+    given_path: &String,
+    is_operator: char,
+    mut attribute: String,
+    delimiters: &Delimiters,
+) {
+    let mut sort_path = fs::read_dir(given_path).unwrap();
+
+    for path in sort_path {
+        let mut current_path = path.unwrap().path();
+
+        if current_path.is_dir() {
+            find_and_replace_recursively(
+                &current_path.display().to_string(),
+                is_operator,
+                attribute.clone(),
+                &delimiters,
+            );
+            continue;
+        }
+        if !current_path.is_file() {
+            break;
+        }
+
+        let file_path = &current_path.display().to_string();
+        let contents = fs::read_to_string(file_path).expect("should have been read the file");
+
+        let mut result =
+            find_attributes_and_replace(is_operator, &mut attribute, contents, &delimiters);
+        write_into_file(&mut result, attribute.clone(), &file_path.clone());
+    }
+}

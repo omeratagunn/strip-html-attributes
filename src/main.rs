@@ -1,7 +1,8 @@
 use clap::Parser;
 use std::fs;
 use strip_html_attributes::{
-    find_attributes_and_replace, write_into_file, DelimiterSchema, Delimiters,
+    find_and_replace_recursively, find_attributes_and_replace, write_into_file, DelimiterSchema,
+    Delimiters,
 };
 
 #[derive(Parser, Debug)]
@@ -10,19 +11,21 @@ pub struct Args {
     /// eg. --attribute=data-testid
     #[arg(short, long)]
     attribute: String,
-    /// eg. --file=/var/www/data/whatever.html
+    /// eg. --folder=/var/www/data/whatever.html
     #[arg(short, long)]
-    file: String,
+    folder: String,
 }
 fn main() {
-    // TODO accept folder and do it recursively //
+    // todo filter by only these files //
+    let supported_file_types = ["js", "jsx", "ts", "tsx", "html"];
+
     let args = Args::parse();
+
+    println!("{:?}", &args);
     let is_operator = '=';
+
     let mut attribute = args.attribute;
-    // then add operator since this is a reserved key in html, nothing else should have been expected //
     attribute.push_str(&is_operator.to_string());
-    let file_path = args.file.as_str();
-    let contents = fs::read_to_string(file_path).expect("should have been read the file");
 
     let delimiters = Delimiters {
         all: vec![
@@ -40,8 +43,5 @@ fn main() {
             },
         ],
     };
-
-    let mut result =
-        find_attributes_and_replace(is_operator, &mut attribute, contents, &delimiters);
-    write_into_file(&mut result, attribute, file_path);
+    find_and_replace_recursively(&args.folder, is_operator, attribute, &delimiters);
 }
