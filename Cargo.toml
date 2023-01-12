@@ -10,7 +10,6 @@ keywords = ["strip html attributes", "javascript", "typescript", "html", "remove
 
 [dependencies]
 colored = "2"
-terminal-spinners = "0.3.2"
 serde = { version = "1.0", features = ["derive"] }
 clap = { version = "4.0.32", features = ["derive"] }
 
