@@ -79,6 +79,7 @@ pub fn find_attributes_and_replace(
                 iter_count += 1;
             }
         }
+        // TODO, maybe instead collecting occurrences and doing a replace, remove them on spot... it heps being %63 faster.
         for (_, replacement) in collection.iter().enumerate() {
             // since we got all into a vector whether they are empty or filled, we eliminate empty ones //
             if !attribute.eq(&replacement) {
