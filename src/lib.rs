@@ -103,12 +103,12 @@ pub fn find_and_replace_recursively(
     mut attribute: String,
     delimiters: &Delimiters,
 ) {
-    let mut sort_path = fs::read_dir(given_path).unwrap();
+    let  sort_path = fs::read_dir(given_path).unwrap();
 
     for path in sort_path {
-        let mut current_path = path.unwrap().path();
-
+        let current_path = path.unwrap().path();
         if current_path.is_dir() {
+
             find_and_replace_recursively(
                 &current_path.display().to_string(),
                 is_operator,

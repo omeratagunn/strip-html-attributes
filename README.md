@@ -8,8 +8,17 @@ On given arguments such as;
 - Folder
 It will recursively open up your files, search for given html attribute, remove them and update the file like a butter.
 
-## Not done yet
-Do not tell me i did not say, currently accepts only file and the attribute to look for.
+## How to use? 
+
+Quite easy.
+
+```
+# Give it a attribute that you want to strip and folder to recursively do;
+
+./strip-html-attributes --attribute=data-something --folder=/var/www/bin
+
+# Thats it.
+```
 
 # Licence
 The MIT License (MIT)

@@ -1,7 +1,6 @@
 use clap::Parser;
-use std::fs;
 use strip_html_attributes::{
-    find_and_replace_recursively, find_attributes_and_replace, write_into_file, DelimiterSchema,
+    find_and_replace_recursively, DelimiterSchema,
     Delimiters,
 };
 
@@ -17,11 +16,9 @@ pub struct Args {
 }
 fn main() {
     // todo filter by only these files //
-    let supported_file_types = ["js", "jsx", "ts", "tsx", "html"];
+    let _supported_file_types = ["js", "jsx", "ts", "tsx", "html"];
 
     let args = Args::parse();
-
-    println!("{:?}", &args);
     let is_operator = '=';
 
     let mut attribute = args.attribute;
